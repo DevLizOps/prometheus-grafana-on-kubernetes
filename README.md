@@ -1,13 +1,15 @@
-
 [Haz click aquí para la versión en Español](#versión-en-español)
 
 # Integration of Prometheus, Grafana and Node Exporter on Kubernetes
 
-Welcome to my monitoring project using Prometheus, Grafana, and Node Exporter! This setup allows you to effortlessly monitor the health and performance of your environments. Below, you'll find an overview of the project, how to deploy it, and additional resources to get you started.
+Welcome to my monitoring project using Prometheus, Grafana and Node Exporter! This setup allows you to effortlessly monitor the health and performance of your environments. Below, you'll find an overview of the project, how to deploy it, and additional resources to get you started.
 
 ## Overview
 
-This project simplifies the monitoring of environments using Prometheus for metrics collection, Grafana for visualization, and Node Exporter for host-level metrics. Whether you're new to monitoring or looking to enhance your existing setup, these configurations and setup instructions will help you get up and running quickly.
+This project simplifies the monitoring of environments using Prometheus for metrics collection, Grafana for visualization and Node Exporter for host-level metrics. Whether you're new to monitoring or looking to enhance your existing setup, these configurations and setup instructions will help you get up and running quickly.
+
+> [!NOTE]
+> This project was originally deployed on Kubernetes using Minikube. To test or use this project, you'll need to have Minikube installed on your local machine. If you don't have Minikube installed, you can follow the installation instructions from the [Minikube documentation](https://minikube.sigs.k8s.io/docs/start/).
 
 ## Features
 
@@ -21,21 +23,22 @@ This project simplifies the monitoring of environments using Prometheus for metr
 ### Getting Started
 
 1. **Clone the Repository**:
-   
-       git clone https://github.com/LizzyMaken/prometheus-grafana-on-kubernetes.git
-       cd prometheus-grafana-on-kubernetes
 
-2. **Deploy Prometheus**:
+         git clone https://github.com/LizzyMaken/prometheus-grafana-on-kubernetes.git
    
-       kubectl apply -f prometheus/
+         cd prometheus-grafana-on-kubernetes
 
-3. **Deploy Grafana**:
-   
-       kubectl apply -f grafana/
+3. **Deploy Prometheus**:
 
-4. **Deploy Node Exporter**:
-   
-       kubectl apply -f node-exporter/
+         kubectl apply -f prometheus/
+
+4. **Deploy Grafana**:
+
+         kubectl apply -f grafana/
+
+5. **Deploy Node Exporter**:
+
+         kubectl apply -f node-exporter/
 
 ### Accessing Grafana
 
@@ -63,9 +66,9 @@ Happy hacking!
 
 ---
 
-## Versión en Español / Spanish Version
+## Versión en Español
 
-[Click here for English Version](#integration-of-prometheus-grafana-and-node-exporter-on-Kubernetes)
+[Click here for English Version](#integration-of-prometheus-grafana-and-node-exporter-on-kubernetes)
 
 # Integración de Prometheus, Grafana y Node Exporter en Kubernetes
 
@@ -74,6 +77,9 @@ Happy hacking!
 ## Visión General
 
 Este proyecto simplifica la monitorización de entornos utilizando Prometheus para la recolección de métricas, Grafana para la visualización y Node Exporter para métricas a nivel de host. Ya sea que estés comenzando con la monitorización o busques mejorar tu configuración actual, estas instrucciones te ayudarán a empezar rápidamente.
+
+> [!NOTE]
+> Este proyecto fue originalmente desplegado en Kubernetes utilizando Minikube. Para probar o utilizar este proyecto, necesitarás tener Minikube instalado en tu máquina local. Si no lo tienes instalado, puedes seguir las instrucciones de instalación en la [documentación de Minikube](https://minikube.sigs.k8s.io/docs/start/es/).
 
 ## Características
 
@@ -87,20 +93,21 @@ Este proyecto simplifica la monitorización de entornos utilizando Prometheus pa
 ### Para empezar
 
 1. **Clona el Repositorio**:
-   
+
        git clone https://github.com/LizzyMaken/prometheus-grafana-on-kubernetes.git
        cd prometheus-grafana-on-kubernetes
 
 2. **Despliega Prometheus**:
-   
+
+
        kubectl apply -f prometheus/
 
 3. **Despliega Grafana**:
-   
+
        kubectl apply -f grafana/
 
 4. **Despliega Node Exporter**:
-   
+
        kubectl apply -f node-exporter/
 
 ### Accede a Grafana
