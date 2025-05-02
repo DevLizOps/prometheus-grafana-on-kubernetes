@@ -9,7 +9,7 @@ Welcome to my monitoring project using Prometheus, Grafana and Node Exporter! Th
 This project simplifies the monitoring of environments using Prometheus for metrics collection, Grafana for visualization and Node Exporter for host-level metrics. Whether you're new to monitoring or looking to enhance your existing setup, these configurations and setup instructions will help you get up and running quickly.
 
 > [!NOTE]
-> This project was originally deployed on Kubernetes using Minikube. To test or use this project, you'll need to have Minikube installed on your local machine. If you don't have Minikube installed, you can follow the installation instructions from the [Minikube documentation](https://minikube.sigs.k8s.io/docs/start/).
+> This project was originally deployed on Kubernetes using Minikube. If you don't have Minikube installed, you can follow the installation instructions from the [Minikube documentation](https://minikube.sigs.k8s.io/docs/start/).
 
 ## Features
 
@@ -89,7 +89,7 @@ Happy monitoring!
 Este proyecto simplifica la monitorización de entornos utilizando Prometheus para la recolección de métricas, Grafana para la visualización y Node Exporter para métricas a nivel de host. Ya sea que estés comenzando con la monitorización o busques mejorar tu configuración actual, estas instrucciones te ayudarán a empezar rápidamente.
 
 > [!NOTE]
-> Este proyecto fue originalmente desplegado en Kubernetes utilizando Minikube. Para probar o utilizar este proyecto, necesitarás tener Minikube instalado en tu máquina local. Si no lo tienes instalado, puedes seguir las instrucciones de instalación en la [documentación de Minikube](https://minikube.sigs.k8s.io/docs/start/es/).
+> Este proyecto fue originalmente desplegado en Kubernetes utilizando Minikube. Si no lo tienes instalado, puedes seguir las instrucciones de instalación en la [documentación de Minikube](https://minikube.sigs.k8s.io/docs/start/es/).
 
 ## Características
 
