@@ -80,7 +80,7 @@ In the image below, there are two visible data groups. This happened because the
 
 ### Undeploying the Stack
 
-To clean uo all the monitoring resources:
+To clean up all the monitoring resources:
 
          bash scripts/undeploy-monitoring-stack.sh
 
