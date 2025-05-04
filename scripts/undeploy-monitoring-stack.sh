@@ -36,4 +36,3 @@ section2 "Force deleting Grafana PVC..."
 kubectl delete pvc grafana-data-claim --ignore-not-found=true --grace-period=0 --force
 
 section1 ">> All resources have been removed."
-#
