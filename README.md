@@ -33,8 +33,10 @@ This project simplifies the monitoring of environments using Prometheus for metr
          bash scripts/deploy-monitoring-stack.sh
 
    > This script handles the full deployment in logical order. It includes setting up PersistentVolumes, ConfigMaps,           Secrets, Deployments, and Services. Additionally, the script connects to the Minikube VM to create the                      `/data/prometheus` directory and sets the correct permissions to ensure Prometheus can write to its volume.
-
-   > It also forcefully deletes any existing Grafana pods before redeploying to prevent issues with persistent volume locks    or misconfigurations.
+   >
+   > It also deletes all existing resources defined in the YAML files to ensure a clean environment before redeployment. This prevents errors related to leftover configurations or persistent volumes that weren't properly released.
+   >
+   > Additionally, it explicitly forces the deletion of the Grafana pod using kubectl delete pod --force, since it may become stuck if it maintains active references to its persistent volume.
 
 3. **Expose Services with External IPs**:
 
@@ -53,13 +55,36 @@ This project simplifies the monitoring of environments using Prometheus for metr
 - Grafana comes preconfigured with dashboards for system metrics.
 - Customize and create new dashboards to monitor specific applications or environments.
 
+#### 🧪 Example: Load a ready-made dashboard
+
+1. Go to **Dashboard > + New > Import** in Grafana.
+2. In a new browser tab, open [https://grafana.com/grafana/dashboards](https://grafana.com/grafana/dashboards).
+3. Search for `Node Exporter Full` and click on the result.
+4. Copy the dashboard ID (**1860**) and return to the Grafana import screen.
+5. Paste `1860` into the **Grafana.com dashboard URL or ID** field and click **Load**.
+6. In the **Select a Prometheus data source** dropdown, choose `Prometheus`, then click **Import**.
+
+#### 📊 What you should see
+
+The **Node Exporter Full** dashboard provides a detailed, real-time overview of node-level system metrics, such as:
+
+- CPU usage breakdown
+- Memory usage and swap
+- Disk space per path
+- Network traffic per interface
+- System uptime and load
+
+In the image below, there are two visible data groups. This happened because the computer running Minikube was turned off temporarily, causing a gap in data collection. Prometheus continues collecting once the node is reachable again.
+
+![image](https://github.com/user-attachments/assets/87682b03-ec3b-4c5e-924a-d6921919d4a6)
+
 ### Undeploying the Stack
 
 To clean uo all the monitoring resources:
 
          bash scripts/undeploy-monitoring-stack.sh
 
-> If the undeployment hangs after deleting the `grafana-data-claim`, it's a known issue related to finalizers. The undeploy script includes logic to automatically force the deletion to avoid this issue.
+> In some situations, the grafana-data-claim can get stuck due to finalizers that prevent it from being fully deleted. To avoid this issue, the script forcefully deletes it using kubectl delete pvc --grace-period=0 --force, ensuring the process doesn't hang and can complete successfully.
 
 ## Additional Resources
 
@@ -111,20 +136,22 @@ Este proyecto simplifica la monitorización de entornos utilizando Prometheus pa
 
        bash scripts/deploy-monitoring-stack.sh
 
-   > Este script automatiza todo el despliegue en orden lógico: volúmenes persistentes, ConfigMaps, Secrets, Deployments y     Services. Además, se conecta automáticamente a la VM de Minikube para crear el directorio `/data/prometheus` y ajustar      los permisos, garantizando que Prometheus pueda escribir en su volumen.
-   
-   > También elimina forzadamente cualquier pod de Grafana existente antes de volver a desplegar, evitando errores de          bloqueo del volumen persistente o configuraciones corruptas.
+   > Este script automatiza todo el despliegue en orden lógico: volúmenes persistentes, ConfigMaps, Secrets, Deployments y Services. Además, se conecta automáticamente a la VM de Minikube para crear el directorio `/data/prometheus` y ajustar los permisos, garantizando que Prometheus pueda escribir en su volumen.
+   >
+   > También elimina todos los recursos existentes definidos en los archivos YAML para asegurar un entorno limpio antes del redepliegue. Esto evita errores relacionados con configuraciones anteriores o volúmenes persistentes no liberados correctamente.
+   > 
+   > Además, fuerza explícitamente la eliminación del pod de Grafana con `kubectl delete pod --force`, ya que puede quedar bloqueado si mantiene referencias activas a su volumen persistente.
 
 3. **Exponer servicios con IP externa**:
 
        bash scripts/start-tunnel-and-show-urls.sh
 
-   > Este script ejecuta `minikube tunnel` en segundo plano y muestra las IPs externas de Prometheus y Grafana. Este           comando se utiliza para crear una ruta hacia los servicios desplegados con el tipo LoadBalancer, lo que permite acceder     a ellos externamente. Expone la IP externa directamente a los programas que se ejecutan en el sistema operativo host,       facilitando el acceso a esos servicios.
+   > Este script ejecuta `minikube tunnel` en segundo plano y muestra las IPs externas de Prometheus y Grafana. Este comando se utiliza para crear una ruta hacia los servicios desplegados con el tipo LoadBalancer, lo que permite acceder a ellos externamente. Expone la IP externa directamente a los programas que se ejecutan en el sistema operativo host, facilitando el acceso a esos servicios.
 
 ### Accede a Prometheus y Grafana
 
-- Utilia las URLs impresas por el script para acceder a Prometheus y Grafana desde el navegador.
-- Las URLs por defecto serán `http://<IP_EXTERNA>:3000` y `http://<IP_EXTERNA>:9090` (las IPs externas también son            accesibles usando el comando `kubectl get svc grafana` después de crear el túnel).
+- Utiliza las URLs impresas por el script para acceder a Prometheus y Grafana desde el navegador.
+- Las URLs por defecto serán `http://<IP_EXTERNA>:3000` y `http://<IP_EXTERNA>:9090` (las IPs externas también son accesibles usando el comando `kubectl get svc grafana` después de crear el túnel).
 - Las credenciales para Grafana están en `grafana/grafana-secret.yaml`.
 
 ### Explora los Paneles de Control
@@ -132,13 +159,36 @@ Este proyecto simplifica la monitorización de entornos utilizando Prometheus pa
 - Grafana viene preconfigurado con paneles de control para métricas del sistema.
 - Personaliza y crea nuevos paneles para monitorear aplicaciones específicas o entornos.
 
+#### 🧪 Ejemplo: Cargar un panel preexistente
+
+1. Ve a **Dashboard > + New > Import** en Grafana.
+2. Abre en otra pestaña del navegador la página [https://grafana.com/grafana/dashboards](https://grafana.com/grafana/dashboards).
+3. Busca `Node Exporter Full` y haz clic en el resultado.
+4. Copia el ID del panel (**1860**) y vuelve a la pantalla de importación en Grafana.
+5. Pega `1860` en el campo **Grafana.com dashboard URL or ID** y haz clic en **Load**.
+6. En el menú desplegable **Select a Prometheus data source**, selecciona `Prometheus` y luego haz clic en **Import**.
+
+#### 📊 Qué deberías ver
+
+El panel **Node Exporter Full** ofrece una visión completa de métricas en tiempo real a nivel de nodo, incluyendo:
+
+- Uso de CPU desglosado
+- Uso de memoria y swap
+- Espacio en disco por ruta
+- Tráfico de red por interfaz
+- Tiempo de actividad y carga del sistema
+
+En la imagen a continuación, se ven dos bloques de datos separados. Esto ocurre porque el ordenador que ejecutaba Minikube se apagó temporalmente, lo cual interrumpió la recogida de métricas. Prometheus reanuda la recopilación cuando el nodo vuelve a estar disponible.
+
+![image](https://github.com/user-attachments/assets/87682b03-ec3b-4c5e-924a-d6921919d4a6)
+
 ### Eliminar el stack
 
 Para eliminar todos los recursos del entorno de monitorización:
 
          bash scripts/undeploy-monitoring-stack.sh
 
-> Si el proceso se queda colgado después de eliminar `grafana-data-claim`, es un problema conocido relacionado con los finalizadores. El script incluye una instrucción para forzar su eliminación automáticamente y evitar bloqueos.
+> En algunas situaciones, el `grafana-data-claim` puede quedarse bloqueado debido a finalizers que impiden su eliminación completa. Para evitar este problema, el script fuerza su eliminación usando kubectl delete pvc --grace-period=0 --force, garantizando así que el proceso no se quede colgado y pueda continuar correctamente.
 
 ## Recursos Adicionales
 
@@ -149,6 +199,6 @@ Explora más sobre Prometheus, Grafana y prácticas de monitorización:
 
 ## Contribuciones
 
-¡Estoy abierta a contribuciones! Si encuentras algún problema o tienes sugerencias para mejoras, por favor abre un issue o envía un pull request.
+¡Estoy abierta a contribuciones! Si encuentras algún problema o tienes sugerencias para mejoras, por favor abre un issue o envía una pull request.
 
 ¡Buena monitorización!
