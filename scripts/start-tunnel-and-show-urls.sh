@@ -27,4 +27,3 @@ done
 
 echo
 echo "Tunnel is running! You can safely close this terminal; services will remain active."
-                  
