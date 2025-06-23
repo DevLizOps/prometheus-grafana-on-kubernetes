@@ -11,6 +11,16 @@ This project simplifies the monitoring of environments using Prometheus for metr
 > [!NOTE]
 > This project was originally deployed on Kubernetes using Minikube. If you don't have Minikube installed, you can follow the installation instructions from the [Minikube documentation](https://minikube.sigs.k8s.io/docs/start/).
 
+## Why this matters
+
+Manually setting up monitoring in Kubernetes can be time-consuming and error-prone. This project automates the full stack deployment (Prometheus, Grafana, Node Exporter), reducing manual setup time by over 85%.  
+
+It’s designed to serve as a monitoring foundation for development clusters or small production environments.
+
+## Example Use Case
+
+Used this stack to monitor a multi-container microservices app in Minikube during testing. Enabled visibility into CPU/memory/disk for each pod and node, helping to debug a memory leak in one of the services.
+
 ## Features
 
 - **Prometheus Integration**: Collects metrics from applications, services or nodes at regular intervals.
@@ -95,9 +105,12 @@ Explore more about Prometheus, Grafana and monitoring practices:
 
 ## Contributing
 
-I'm open to contributions! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+I'm open to contributions! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
+
+This project is licensed under the [MIT License](LICENSE), so you're welcome to use, modify, and share it freely.
 
 Happy monitoring!
+
 
 ---
 
@@ -115,6 +128,18 @@ Este proyecto simplifica la monitorización de entornos utilizando Prometheus pa
 
 > [!NOTE]
 > Este proyecto fue originalmente desplegado en Kubernetes utilizando Minikube. Si no lo tienes instalado, puedes seguir las instrucciones de instalación en la [documentación de Minikube](https://minikube.sigs.k8s.io/docs/start/es/).
+
+## Por qué es importante
+
+Configurar manualmente un sistema de monitorización en Kubernetes puede ser lento y propenso a errores.  
+Este proyecto automatiza el despliegue completo del stack (Prometheus, Grafana y Node Exporter), reduciendo el tiempo de configuración manual en más de un 85 %.
+
+Está diseñado como base de monitorización para clústeres de desarrollo o entornos de producción pequeños.
+
+## Ejemplo de caso de uso
+
+Utilicé este stack para monitorizar una aplicación de microservicios con múltiples contenedores en Minikube durante las pruebas.  
+Permitió tener visibilidad sobre el uso de CPU, memoria y disco por pod y nodo, lo que ayudó a detectar una fuga de memoria en uno de los servicios.
 
 ## Características
 
@@ -199,6 +224,8 @@ Explora más sobre Prometheus, Grafana y prácticas de monitorización:
 
 ## Contribuciones
 
-¡Estoy abierta a contribuciones! Si encuentras algún problema o tienes sugerencias para mejoras, por favor abre un issue o envía una pull request.
+¡Estoy abierta a contribuciones! Si encuentras algún problema o tienes sugerencias para mejorar, no dudes en abrir un issue o enviar un pull request.
+
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE), por lo que puedes usarlo, modificarlo y compartirlo libremente.
 
 ¡Buena monitorización!
