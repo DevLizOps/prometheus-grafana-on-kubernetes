@@ -55,7 +55,7 @@ This setup provides complete visibility over Minikube and demonstrates how to in
    
    It also deletes all existing resources defined in the YAML files to ensure a clean environment before redeployment. This prevents errors related to leftover configurations or persistent volumes that weren't properly released.
    
-   Additionally, it explicitly forces the deletion of the Grafana pod using kubectl delete pod --force, since it may become stuck if it maintains active references to its persistent volume.
+   Additionally, it explicitly forces the deletion of the Grafana pod using `kubectl delete pod --force`, since it may become stuck if it maintains active references to its persistent volume.
 
 5. **Expose Services via LoadBalancer**:
 
@@ -110,7 +110,7 @@ bash scripts/undeploy-monitoring-stack.sh
 ```
 
 > [!WARNING]
-> In some situations, the grafana-data-claim can get stuck due to finalizers that prevent it from being fully deleted. To avoid this issue, the script forcefully deletes it using kubectl delete pvc --grace-period=0 --force, ensuring the process doesn't hang and can complete successfully.
+> In some situations, the grafana-data-claim can get stuck due to finalizers that prevent it from being fully deleted. To avoid this issue, the script forcefully deletes it using `kubectl delete pvc --grace-period=0 --force`, ensuring the process doesn't hang and can complete successfully.
 
 ## 📚 Additional Resources
 
@@ -242,7 +242,7 @@ bash scripts/undeploy-monitoring-stack.sh
 ```
 
 > [!WARNING]
-> En algunas situaciones, el `grafana-data-claim` puede quedarse bloqueado debido a finalizers que impiden su eliminación completa. Para evitar este problema, el script fuerza su eliminación usando kubectl delete pvc --grace-period=0 --force, garantizando así que el proceso no se quede colgado y pueda continuar correctamente.
+> En algunas situaciones, el `grafana-data-claim` puede quedarse bloqueado debido a finalizers que impiden su eliminación completa. Para evitar este problema, el script fuerza su eliminación usando `kubectl delete pvc --grace-period=0 --force`, garantizando así que el proceso no se quede colgado y pueda continuar correctamente.
 
 ## 📚 Recursos Adicionales
 
